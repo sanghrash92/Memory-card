@@ -1,64 +1,40 @@
-import './styles/App.css'
-import './styles/welcome.css'
-import { Welcome } from "./components/Welcome"
-import { Images } from "./components/images"
-import { Loading } from "./components/loading"
-import { 
-  useState,
-  useEffect } from 'react'
-
-  const Header = () => {
-    return (
-      <header>
-        <h1>Memory game</h1>
-        <h2>Pick all characters without repeating.</h2>
-        <br />
-      </header>
-    )
-  }
+import Pages from './pages/Pages'
+import { BrowserRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { GiAbstract050 } from "react-icons/gi";
 
 function App() {
-  const [imageList, setImageList] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchRequest = async (pageNum) => {
-    const data = await fetch(
-      `https://api.unsplash.com/search/photos?page=1&per_page=${pageNum}&query=Golf&client_id=-RGBeeYDvRYQY2cWmfktUdb4TJigFFWyfZ2NGF-1CWQ`
-    );
-    const dataJ = await data.json();
-    const result =  await dataJ.results;
-    setImageList(result);
-  };
-
-  useEffect(() => {
-    fetchRequest()
-  }, [])
-
-
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 4000)
-  }, [])
-  if(loading) {
-    return (
-      <div>
-        <Loading />
-      </div>
-    )
-  }
- 
-
   return (
-    <>
-      <Header />
-      <div className="difficulty-level">
-        <Welcome fetchReq={fetchRequest} />
-      </div>
-      <br />
-      <main>
-        <Images list={imageList}/>
-      </main>
-    </>
+    <div className="App">
+      <BrowserRouter>
+        <Nav>
+          <GiAbstract050 />
+          <Logo to={'/'}>Home</Logo>
+        </Nav>
+        <Pages />
+      </BrowserRouter>
+    </div>
   )
 }
+
+const Logo = styled(Link)`
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-family: 'Lobster Two', cursive;
+  color: white;
+  padding-left: 0.8rem;
+`;
+
+const Nav = styled.div`
+  padding: 4rem 0rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    font-size: 2rem;
+  }
+`
 
 export default App
