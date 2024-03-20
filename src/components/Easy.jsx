@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react';
 import shuffleArray from './Shuffle';
 import styled from 'styled-components';
+import { Loading } from "../pages/loading"
 
 function Easy() {
     const [comicsList, setComicsList] = useState([]);
     const [score, setScore] = useState(0);
     const [checkList, setCheckList] = useState([]);
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+      setTimeout(() => setLoading(false), 4000)
+    }, [])
 
     useEffect(() => {
       fetchRequest();
-    }, [])
+    }, []);
   
     const fetchRequest = async () => {
       const data = await fetch(
@@ -18,6 +24,14 @@ function Easy() {
       const dataJ = await data.json();
       setComicsList(dataJ.results);
     };
+
+    if(loading) {
+      return (
+        <div className='load'>
+          <Loading />
+        </div>
+      )
+    }
 
     const handleClick = (e) => {
       setCheckList(e.target.src);
@@ -54,7 +68,6 @@ function Easy() {
 export default Easy;
 
 const Wrapper = styled.div`
-  margin: 4rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,6 +90,7 @@ const ImageCard = styled.div`
     object-fit: cover;
     height: 300px;
     width: 350px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 `;
 

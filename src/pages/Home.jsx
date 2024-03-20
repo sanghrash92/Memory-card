@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-// import { Loading } from './loading';
 
 const Header = () => {
     return (
@@ -9,6 +8,7 @@ const Header = () => {
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
+        color: 'white',
       }}>
         <h1>Memory game</h1>
         <h2>Pick all characters without repeating the same character.</h2>
@@ -25,7 +25,7 @@ function Home() {
         <h2>Please choose your Level</h2>
         <Button>
             <Link to={'/easy'}>
-              <Btn mode='Easy'  /> 
+              <Btn mode='Easy' /> 
             </Link>
             <Link to={'/medium'}>
               <Btn mode='Medium' /> 
@@ -39,19 +39,9 @@ function Home() {
 }
 
 const Btn = ({mode}) => {
-    const style = {
-        width: '150px',
-        height: '40px',
-        backgroundColor: '#fa6400',
-        color: 'white',
-        border: '1px solid transparent',
-        fontSize: '1.3rem',
-        fontFamily: 'Jost',
-        cursor: 'pointer',
-    }
 
     return (
-        <button style={style}>{mode}</button>
+        <button className='button2'>{mode}</button>
     )
 }
 
@@ -66,15 +56,15 @@ const Button = styled.div`
 `;
 
 const Wrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
-    h2 {
-        font-weight: 600;
-        color: white;
-    }
+  h2 {
+      font-weight: 600;
+      color: white;
+  }
 
 `
 

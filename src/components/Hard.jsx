@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import shuffleArray from './Shuffle';
+import { Loading } from "../pages/loading"
+
 
 function Hard() {
     const [oceanList, setOceanList] = useState([]);
     const [score, setScore] = useState(0);
     const [checkList, setCheckList] = useState([]);
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+      setTimeout(() => setLoading(false), 4000)
+    }, [])
     
     useEffect(() => {
         const fetchRequest = async () => {
@@ -18,6 +25,14 @@ function Hard() {
         };
         fetchRequest();
     }, [])
+
+    if(loading) {
+      return (
+        <div>
+          <Loading />
+        </div>
+      )
+    }
     
     const handleClick = (e) => {
         setCheckList(e.target.src);
@@ -39,10 +54,10 @@ function Hard() {
             {oceanList.map((oceans) => {
                 return (
                     <ImageCard key={oceans.id}>
-                        <img 
-                            src={oceans.urls.regular} 
-                            alt={oceans.alt_description}
-                            onClick={handleClick} />
+                        <img
+                          src={oceans.urls.regular} 
+                          alt={oceans.alt_description}
+                          onClick={handleClick} />
                     </ImageCard>
                 )
             })}
@@ -76,6 +91,8 @@ const ImageCard = styled.div`
     object-fit: cover;
     height: 300px;
     width: 350px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
   }
 `;
 

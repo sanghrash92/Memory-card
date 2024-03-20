@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import shuffleArray from './Shuffle';
+import { Loading } from "../pages/loading"
 
 function Medium() {
     const [mountainList, setMountainList] = useState([]);
     const [score, setScore] = useState(0);
     const [checkList, setCheckList] = useState([]);
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+      setTimeout(() => setLoading(false), 4000)
+    }, [])
     
     useEffect(() => {
         const fetchRequest = async () => {
@@ -17,6 +23,14 @@ function Medium() {
         };       
         fetchRequest()
     }, []);
+
+    if(loading) {
+      return (
+        <div>
+          <Loading />
+        </div>
+      )
+    }
 
     const handleClick = (e) => {
         setCheckList(e.target.src);
@@ -74,6 +88,7 @@ const ImageCard = styled.div`
     object-fit: cover;
     height: 300px;
     width: 350px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 `;
 

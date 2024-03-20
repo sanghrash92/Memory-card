@@ -25,15 +25,17 @@ const Logo = styled(Link)`
   font-family: 'Lobster Two', cursive;
   color: white;
   padding-left: 0.8rem;
-`;
-
-const Nav = styled.div`
-  padding: 4rem 0rem;
+  `;
+  
+  const Nav = styled.div`
+  padding: 2rem 0rem;
   display: flex;
   justify-content: center;
   align-items: center;
   svg {
     font-size: 2rem;
+    cursor: pointer;
+    width: 2.5rem;
   }
 `
 

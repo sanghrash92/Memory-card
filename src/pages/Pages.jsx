@@ -5,19 +5,6 @@ import Hard from '../components/Hard';
 import { Route, Routes } from 'react-router-dom';
 
 function Pages() {
-    // const [loading, setLoading] = useState(true);
-
-    // useEffect(() => {
-    //     setTimeout(() => setLoading(false), 4000)
-    //     }, [])
-
-    // if(loading) {
-    //     return (
-    //         <div>
-    //             <Loading />
-    //         </div>
-    //     )
-    // }
   return (
     <Routes>
         <Route path='/' element={<Home />} />
